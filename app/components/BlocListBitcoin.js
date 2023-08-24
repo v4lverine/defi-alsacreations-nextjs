@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import styles from "./components.module.css";
 
+//composant du formulaire d'appel à l'API
+
 export default function BlocListBitcoin() {
   const [rateBitcoin, setRateBitcoin] = useState({});
   const [value, setValue] = useState("USD");
@@ -10,22 +12,21 @@ export default function BlocListBitcoin() {
     fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setRateBitcoin(data);
-        console.log(rateBitcoin);
       })
       .catch((err) => console.log(err));
-  }, [rateBitcoin]);
+  }, []);
 
   function handleButton(e) {
     e.preventDefault();
-    // setRateBitcoin;
   }
 
   return (
     <section className={styles.entireBlocBitcoin}>
       <h1>
-        {/* Aujourd'hui, BTC vaut {rateBitcoin.bpi[value].symbol}
-        {rateBitcoin.bpi[value].rate} */}
+        Aujourd'hui, BTC vaut {rateBitcoin.bpi[value].symbol}
+        {rateBitcoin.bpi[value].rate}
       </h1>
       <form className={styles.bitcoinForm}>
         <label>monnaie : </label>

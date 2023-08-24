@@ -1,12 +1,16 @@
+/*feuille de style du composant "BlocListBictoin"*/
 .entireBlocBitcoin {
-  width: 500px;
-  height: 500px;
-  color: white;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 100px;
-  margin-inline: 30%;
+  height: fit-content;
+  position: absolute;
+  width: 60%;
+  height: 50%;
+  top: 150px;
+  left: 20%;
+  border-radius: 50px;
 }
 .buttonStyle {
   font-size: 2em;
