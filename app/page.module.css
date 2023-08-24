@@ -1,0 +1,6 @@
+.main {
+  background-image: url("/bg.svg");
+  width: 500px;
+  height: 500px;
+  margin-inline: 30%;
+}
