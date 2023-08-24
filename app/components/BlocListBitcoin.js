@@ -42,26 +42,29 @@ export default function BlocListBitcoin() {
 
   return (
     <section className={styles.entireBlocBitcoin}>
-      <h1>Aujourd'hui, BTC vaut {valueH1}</h1>
+      <h1 style={{ textAlign: "center" }}>Aujourd'hui, BTC vaut {valueH1}</h1>
       <form className={styles.bitcoinForm}>
-        <label>monnaie : </label>
-        <select
-          name="currency"
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-            if ("bpi" in rateBitcoin) {
-              setValueH1(
-                getCurrencySymbol(e.target.value) +
-                  rateBitcoin.bpi[e.target.value].rate
-              );
-            }
-          }}
-        >
-          <option value="USD">USD</option>
-          <option value="GBP">GBP</option>
-          <option value="EUR">EUR</option>
-        </select>{" "}
+        <div className={styles.selectCurrency}>
+          <label htmlFor="currency">monnaie : </label>
+          <select
+            className={styles.selectBoxCurrency}
+            name="currency"
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+              if ("bpi" in rateBitcoin) {
+                setValueH1(
+                  getCurrencySymbol(e.target.value) +
+                    rateBitcoin.bpi[e.target.value].rate
+                );
+              }
+            }}
+          >
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="EUR">EUR</option>
+          </select>{" "}
+        </div>
         <br />
         <button onClick={handleButton} className={styles.buttonStyle}>
           <img src="/plus.svg" alt="Icône plus" /> Hop !

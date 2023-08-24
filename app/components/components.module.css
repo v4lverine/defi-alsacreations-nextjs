@@ -6,20 +6,30 @@
   justify-content: center;
   height: fit-content;
   position: absolute;
-  width: 60%;
+  width: 70%;
   height: 50%;
-  top: 150px;
-  left: 20%;
+  top: 130px;
+  left: 15%;
   border-radius: 50px;
 }
 .buttonStyle {
   font-size: 2em;
   border-radius: 50px;
-  width: 150px;
+  width: 200px;
   border: none;
   font-weight: 700;
   color: #7431a5;
+  margin-inline: 20%;
 }
-.bitcoinForm {
-  margin-inline: 35%;
+.buttonStyle:hover {
+  background-color: #7431a5;
+  color: white;
+  cursor: pointer;
+}
+.selectCurrency {
+  display: flex;
+  justify-content: center;
+}
+.selectBoxCurrency {
+  margin-left: 5px;
 }
