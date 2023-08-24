@@ -6,34 +6,57 @@ import styles from "./components.module.css";
 
 export default function BlocListBitcoin() {
   const [rateBitcoin, setRateBitcoin] = useState({});
+  const [valueH1, setValueH1] = useState(" ");
   const [value, setValue] = useState("USD");
 
-  useEffect(() => {
+  function getCurrencySymbol(currency) {
+    switch (currency) {
+      case "USD":
+        return "$";
+        break;
+      case "GBP":
+        return "£";
+        break;
+      case "EUR":
+        return "€";
+        break;
+      default:
+        return "";
+    }
+  }
+
+  function callAPI() {
     fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setRateBitcoin(data);
+        setValueH1(getCurrencySymbol(value) + data.bpi[value].rate);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
 
   function handleButton(e) {
     e.preventDefault();
+    callAPI();
   }
 
   return (
     <section className={styles.entireBlocBitcoin}>
-      <h1>
-        Aujourd'hui, BTC vaut {rateBitcoin.bpi[value].symbol}
-        {rateBitcoin.bpi[value].rate}
-      </h1>
+      <h1>Aujourd'hui, BTC vaut {valueH1}</h1>
       <form className={styles.bitcoinForm}>
         <label>monnaie : </label>
         <select
           name="currency"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            setValue(e.target.value);
+            if ("bpi" in rateBitcoin) {
+              setValueH1(
+                getCurrencySymbol(e.target.value) +
+                  rateBitcoin.bpi[e.target.value].rate
+              );
+            }
+          }}
         >
           <option value="USD">USD</option>
           <option value="GBP">GBP</option>
@@ -41,7 +64,7 @@ export default function BlocListBitcoin() {
         </select>{" "}
         <br />
         <button onClick={handleButton} className={styles.buttonStyle}>
-          Hop
+          <img src="/plus.svg" alt="Icône plus" /> Hop !
         </button>
       </form>
     </section>
