@@ -9,6 +9,7 @@ export default function BlocListBitcoin() {
   const [valueH1, setValueH1] = useState(" ");
   const [value, setValue] = useState("USD");
 
+  //condition pour faire afficher le bon symbole selon la monnaie choisie
   function getCurrencySymbol(currency) {
     switch (currency) {
       case "USD":
@@ -25,6 +26,7 @@ export default function BlocListBitcoin() {
     }
   }
 
+  //Récupération des données de l'API
   function callAPI() {
     fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
       .then((res) => res.json())
@@ -35,13 +37,20 @@ export default function BlocListBitcoin() {
       .catch((err) => console.log(err));
   }
 
+  //définition d'un événement utilisateur au clic sur l'unique bouton
   function handleButton(e) {
     e.preventDefault();
     callAPI();
   }
 
+  //Affichage sur le DOM
   return (
     <section className={styles.entireBlocBitcoin}>
+      <img
+        src="/quotes.svg"
+        style={{ position: "absolute", top: "-8%", left: "40%" }}
+        alt="Logo des guillemets"
+      />
       <h1 style={{ textAlign: "center" }}>Aujourd'hui, BTC vaut {valueH1}</h1>
       <form className={styles.bitcoinForm}>
         <div className={styles.selectCurrency}>
@@ -67,7 +76,8 @@ export default function BlocListBitcoin() {
         </div>
         <br />
         <button onClick={handleButton} className={styles.buttonStyle}>
-          <img src="/plus.svg" alt="Icône plus" /> Hop !
+          <img src="/plus.svg" alt="Icône plus sur le bouton du formulaire" />{" "}
+          Hop !
         </button>
       </form>
     </section>
